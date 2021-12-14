@@ -1,15 +1,16 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "./",
     database: "tasks",
+    waitForConnections :true,
+    connectionLimit : 10,
+    queueLimit:0
 });
 
-const query = function query(query,operation){
+const query = (query)=>{
     connection.query(query, (err,res) => {
-        console.log('#######{ '+operation+' }#######');
-        if (operation==='update' || operation==='select' ){console.log(res);};
         if (err) throw err;
         
         });

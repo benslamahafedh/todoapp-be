@@ -1,4 +1,4 @@
-const db = require("./database_connection");
+const services = require("./services/servicees")
 const Joi = require("joi");
 const express = require("express");
 const app = express();
@@ -24,9 +24,7 @@ app.get("/", (req, res) => {
   res.send(db.query("SELECT * FROM tasks;",'selection'));
 });
 
-// app.get ('/add',(req,res)=>{
-//   res.send(db.query(`INSERT INTO TASKS VALUES (##################)`,'insertion'))
-// });
+
 
 app.get ('/high',(req,res)=>{
   res.send (db.query(`SELECT * FROM TASKS 
@@ -40,10 +38,10 @@ app.get ("/today",(req,res)=>{
 
 app.get( '/home',(req,res)=>{
   res.send(db.query(`SELECT * FROM TASKS 
-                    WHERE 'type'='home';`))
+                    WHERE 'type'='home';`,'selection'))
 });
 
 app.get( '/school',(req,res)=>{
   res.send(db.query(`SELECT * FROM TASKS 
-                    WHERE 'type'='school';`))
+                    WHERE 'type'='school';`,'selection'))
 });
