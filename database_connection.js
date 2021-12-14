@@ -1,6 +1,6 @@
 const mysql = require("mysql2/promise");
 
-const connection = async ()=>{
+const query = async ()=>{
 
     try {
         const connection = await mysql.createConnection({
@@ -10,6 +10,12 @@ const connection = async ()=>{
             database: "tasks",
             
         });
+        const query = async (query)=>{
+            await connection.query(query, (err,res) => {
+                if (err) throw res.status(404).json(err);
+                
+                });
+        };
         
     }
     catch(ex){
@@ -19,13 +25,7 @@ const connection = async ()=>{
 
 
 
-const query = async (query)=>{
-    
-    await connection.query(query, (err,res) => {
-        if (err) throw res.status(404).json(err);
-        
-        });
-};
+
 
 
 module.exports.query = query;
