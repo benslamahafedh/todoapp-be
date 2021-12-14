@@ -5,8 +5,9 @@ const  getall= ()=>{
     db.query("SELECT * FROM tasks;");
 };
 
-const get =(coloumn)=>{
-    db.query(`SELECT ${coloumn} FROM tasks;`)
+const get =(coloumn,conditionColumn,condition)=>{
+    db.query(`SELECT ${coloumn} FROM tasks
+            WHERE ${conditionColumn}=${condition};`)
 };
 
 const update =(updatedColoumn,value,conditionColumn,condition)=>{

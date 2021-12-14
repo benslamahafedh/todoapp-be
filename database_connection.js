@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 const query = (query)=>{
     connection.query(query, (err,res) => {
-        if (err) throw err;
+        if (err) throw res.status(404).json(err);
         
         });
 };

@@ -1,4 +1,4 @@
-const services = require("./services/servicees")
+const services = require("./services/servicees");
 const Joi = require("joi");
 const express = require("express");
 const app = express();
@@ -20,28 +20,43 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  
-  res.send(db.query("SELECT * FROM tasks;",'selection'));
+  const getall = services.getall();
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(getall);
 });
 
-
-
-app.get ('/high',(req,res)=>{
-  res.send (db.query(`SELECT * FROM TASKS 
-                    WHERE 'priority'='High';`,'selection'))
+app.get("/high", (req, res) => {
+  const get = services.get("*", "priority", "High");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(get);
 });
 
-app.get ("/today",(req,res)=>{
-  res.send(db.query(`SELECT * FROM TASKS 
-                    WHERE 'due_on'=GETDATE(); `,'selection'))
+app.get("/today", (req, res) => {
+  const get = services.get("*", "due_on", "GETDATE()");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(get);
 });
 
-app.get( '/home',(req,res)=>{
-  res.send(db.query(`SELECT * FROM TASKS 
-                    WHERE 'type'='home';`,'selection'))
+app.get("/home", (req, res) => {
+  const get = services.get("*", "type", "home");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(get);
 });
 
-app.get( '/school',(req,res)=>{
-  res.send(db.query(`SELECT * FROM TASKS 
-                    WHERE 'type'='school';`,'selection'))
+app.get("/school", (req, res) => {
+  const get = services.get("*", "type", "school");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(get);
+});
+
+app.post("/create", (req, res) => {
+  const create = services.create("1", "test", "test", "test", "test", "test");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(create);
+});
+
+app.delete("/delete", (req, res) => {
+  const del = services.del("status", "done");
+  if (err) throw res.status(404).json(err);
+  res.status(200).json(del);
 });
