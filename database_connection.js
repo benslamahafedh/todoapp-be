@@ -1,16 +1,27 @@
-const mysql = require("mysql2");
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "./",
-    database: "tasks",
-    waitForConnections :true,
-    connectionLimit : 10,
-    queueLimit:0
-});
+const mysql = require("mysql2/promise");
 
-const query = (query)=>{
-    connection.query(query, (err,res) => {
+const connection = async ()=>{
+
+    try {
+        const connection = await mysql.createConnection({
+            host: "localhost",
+            user: "root",
+            password: "./",
+            database: "tasks",
+            
+        });
+        
+    }
+    catch(ex){
+        console.error(ex);
+    }
+}
+
+
+
+const query = async (query)=>{
+    
+    await connection.query(query, (err,res) => {
         if (err) throw res.status(404).json(err);
         
         });

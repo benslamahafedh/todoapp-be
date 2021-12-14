@@ -1,4 +1,4 @@
-const db = require("./database_connection");
+const db = require("./../database_connection");
 
 
 const  getall= ()=>{
