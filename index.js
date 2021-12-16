@@ -19,18 +19,35 @@ app.listen(port, () => {
   console.log(`listening on port ${port}....`);
 });
 
+// app.get('/:id',(req,res)=>{
+//   res.status(200).json(req.params.id);
+// });
+
 app.get("/", (req, res) => {
   try{
     const getall = services.getall();
     res.status(200).json(getall);
+    
   }catch(err){
     console.error(err);
   }
 });
 
-app.get("/high", (req, res) => {
+app.get ('/:id',(req,res)=>{
   try{
-    const get = services.get("*", "priority", "High");
+    const id =req.params.id
+    const get = services.get('*',id,'?');
+    res.status(200).json(get);
+    
+  }
+  catch(err){
+    console.error(err);
+  };
+});
+
+app.get("/:priority", (req, res) => {
+  try{
+    const get = services.get("*", "priority", "?");
   
   res.status(200).json(get);}
   catch(err){
@@ -38,9 +55,9 @@ app.get("/high", (req, res) => {
   }
 });
 
-app.get("/today", (req, res) => {
+app.get("/:due_on", (req, res) => {
   try{
-    const get = services.get("*", "due_on", "GETDATE()");
+    const get = services.get("*", "due_on", "?");
   
   res.status(200).json(get);}
   catch(err){
@@ -48,19 +65,9 @@ app.get("/today", (req, res) => {
   }
 });
 
-app.get("/home", (req, res) => {
+app.get("/:type", (req, res) => {
   try{
-    const get = services.get("*", "type", "home");
-  
-  res.status(200).json(get);}
-  catch(err){
-    console.error(err);
-  }
-});
-
-app.get("/school", (req, res) => {
-  try{
-    const get = services.get("*", "type", "school");
+    const get = services.get("*", "type", "?");
   
   res.status(200).json(get);}
   catch(err){
