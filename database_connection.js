@@ -1,6 +1,8 @@
 const mysql = require("mysql2/promise");
 
-const query = async ()=>{
+
+
+const main = async (db_request)=>{
 
     try {
         const connection = await mysql.createConnection({
@@ -8,24 +10,15 @@ const query = async ()=>{
             user: "root",
             password: "./",
             database: "tasks",
-            
         });
-        const query = async (query)=>{
-            await connection.query(query, (err,res) => {
-                if (err) throw res.status(404).json(err);
-                
-                });
-        };
+        const result= await connection.execute(db_request)
+        return result[0]
         
     }
     catch(ex){
         console.error(ex);
     }
-}
+};
+module.exports.main = main;
 
 
-
-
-
-
-module.exports.query = query;
