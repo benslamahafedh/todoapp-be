@@ -12,7 +12,6 @@ const main = async (db_request)=>{
             database: "tasks",
         });
         const result= await connection.execute(db_request)
-        return result[0]
         
     }
     catch(ex){
