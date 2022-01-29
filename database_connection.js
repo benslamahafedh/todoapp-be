@@ -2,7 +2,7 @@ const mysql = require("mysql2/promise");
 
 
 
-const main = async (db_request)=>{
+const main = async (req)=>{
 
     try {
         const connection = await mysql.createConnection({
@@ -11,8 +11,10 @@ const main = async (db_request)=>{
             password: "./",
             database: "tasks",
         });
-        const result= await connection.execute(db_request)
-        
+        const res= await connection.execute(req)
+        connection.end()
+        return res [0]
+
     }
     catch(ex){
         console.error(ex);
@@ -21,3 +23,4 @@ const main = async (db_request)=>{
 module.exports.main = main;
 
 
+main("Select * from tasks")
