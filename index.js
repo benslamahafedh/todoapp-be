@@ -4,10 +4,13 @@ const app = express();
 app.use(express.json());
 app.set('view engine','pug');
 
-const response=services.getall();
 
-// services.get('1');
-// services.update('name','hafedh');
+services.getAll()
+
+services.get();
+services.update();
+services.create();
+services.del();
 
 
 // app.get ('/:id',(req,res)=>{
